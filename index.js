@@ -62,11 +62,11 @@ bot.on('message', msg => {
 bot.on('message', message => {
     if (message.author.bot) return;
     if (message.content.toLowerCase() === '&verify' && message.channel.id === '729994672847454218') {
-        const role = message.guild.roles.cache.get('729597571156148274');
+        let role = message.guild.roles.cache.get('729597571156148274');
 
         if (role) {
             try {
-                await message.member.roles.add(role);
+                message.member.roles.add(role)
                 message.channel.send(`${message.author.username} is verified!`);
                 console.log("Role added!");
             }

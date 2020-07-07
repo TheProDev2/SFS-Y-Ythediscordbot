@@ -14,7 +14,6 @@ var version = '1.0';
 
 bot.on('ready', () => {
     console.log("SFS Y-Y bot is online!");
-    bot.user.setActivity("In tests", { type: 'WATCHING' }).catch(console.error);
 })
 
 bot.on('guildMemberAdd', member => {
@@ -38,6 +37,12 @@ bot.on('message', msg => {
 
 bot.on('message', msg => {
     if (msg.content === 'שלום') {
+        msg.reply('שלום!');
+    }
+})
+
+bot.on('message', msg => {
+    if (msg.content === 'היי') {
         msg.reply('שלום!');
     }
 })
@@ -77,6 +82,8 @@ bot.on('message', message => {
 
         case 'poll':
 
+            if (!msg.member.roles.cache.find(r => r.name === "Staff")) return msg.channel.send('You dont have the permisions to do this command.')
+
             const Embed = new Discord.MessageEmbed()
                 .setColor(0x00BDFF)
                 .setTitle("Initiate Poll")
@@ -97,6 +104,8 @@ bot.on('message', message => {
             break;
 
         case 'kick':
+
+            if (!msg.member.roles.cache.find(r => r.name === "Staff")) return msg.channel.send('You dont have the permisions to do this command.')
 
             const user = message.mentions.users.first();
 
@@ -120,6 +129,8 @@ bot.on('message', message => {
             break;
 
         case 'ban':
+
+            if (!msg.member.roles.cache.find(r => r.name === "Staff")) return msg.channel.send('You dont have the permisions to do this command.')
 
             const userman = message.mentions.users.first();
 

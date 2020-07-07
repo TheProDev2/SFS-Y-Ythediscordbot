@@ -138,7 +138,7 @@ bot.on('message', message => {
                 const member = message.guild.member(userman);
 
                 if (member) {
-                    member.ban({ressino: 'You ware bad!'}).then(() =>{
+                    member.ban({ ressino: 'You ware bad!' }).then(() => {
                         message.reply(`We banned the player: ${userman.tag}`);
                     }).catch(err => {
                         message.reply(`I was unbale to ban the member`);
@@ -151,7 +151,7 @@ bot.on('message', message => {
                 message.reply("You need to specify a person!")
             }
 
-        break;
+            break;
 
         case 'image':
             image(message);

@@ -10,7 +10,30 @@ const request = require('request');
 
 const PREFIX = '&';
 
-var version = '1.0';
+var version = '1.1.0';
+
+const serverStats = {
+    serverID: '729338182528663714',
+    totalUsersID: '730343531650220065',
+    memberCountID: '730343640206934047',
+    botCountID: '730343681751646209'
+};
+
+bot.on('guildMemberAdd', member => {
+    if(member.guild.id !== serverStats.serverID) return;
+
+    bot.channels.cache.get(serverStats.totalUsersID).setName(`Total Users: ${member.guild.memberCount}`);
+    bot.channels.cache.get(serverStats.memberCountID).setName(`Members Count: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
+    bot.channels.cache.get(serverStats.botCountID).setName(`Bot Count: ${member.guild.members.cache.filter(m => m.user.bot).size}`);
+});
+
+bot.on('guildMemberRemove', member => {
+    if(member.guild.id !== serverStats.serverID) return;
+
+    bot.channels.cache.get(serverStats.totalUsersID).setName(`Total Users: ${member.guild.memberCount}`);
+    bot.channels.cache.get(serverStats.memberCountID).setName(`Members Count: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
+    bot.channels.cache.get(serverStats.botCountID).setName(`Bot Count: ${member.guild.members.cache.filter(m => m.user.bot).size}`);
+});
 
 bot.on('ready', () => {
     console.log("SFS Y-Y bot is online!");

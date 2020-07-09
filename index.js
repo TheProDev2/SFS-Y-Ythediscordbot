@@ -186,8 +186,8 @@ bot.on("message", (message) => {
 
   switch (args[0]) {
     case "poll":
-      if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
-        return msg.channel.send(
+      if (!message.member.roles.cache.find((r) => r.name === "Staff"))
+        return message.channel.send(
           "You dont have the permisions to do this command."
         );
       const pollEmbed = new Discord.MessageEmbed()

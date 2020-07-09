@@ -185,7 +185,7 @@ bot.on("message", (message) => {
   let args = message.content.substring(PREFIX.length).split(" ");
 
   switch (args[0]) {
-    case "p":
+    case "poll":
       if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
         return msg.channel.send(
           "You dont have the permisions to do this command."

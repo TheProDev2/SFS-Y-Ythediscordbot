@@ -10,7 +10,9 @@ const request = require("request");
 
 const PREFIX = "&";
 
-var version = "1.1.2";
+var version = "1.2.0";
+
+const ytdl = require("ytdl-core");
 
 const serverStats = {
   serverID: "729338182528663714",

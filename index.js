@@ -162,7 +162,7 @@ bot.on("message", (msg) => {
               "The commands are in #bot-commands-info in SFS Y-Y official server",
           },
 
-          { name: "Bot Version", value: "My version is ", version }
+          { name: "Bot Version", value: "My version is " + version }
         )
         .setTimestamp()
         .setFooter(

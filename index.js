@@ -10,7 +10,7 @@ const request = require("request");
 
 const PREFIX = "&";
 
-var version = "1.1.1";
+var version = "1.1.2";
 
 const serverStats = {
   serverID: "729338182528663714",
@@ -160,7 +160,9 @@ bot.on("message", (msg) => {
             name: "Commands",
             value:
               "The commands are in #bot-commands-info in SFS Y-Y official server",
-          }
+          },
+
+          { name: "Bot Version", value: "My version is ", version }
         )
         .setTimestamp()
         .setFooter(
@@ -183,31 +185,28 @@ bot.on("message", (message) => {
   let args = message.content.substring(PREFIX.length).split(" ");
 
   switch (args[0]) {
-    case "poll":
+    case "p":
       if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
         return msg.channel.send(
           "You dont have the permisions to do this command."
         );
-
-      const Embed = new Discord.MessageEmbed()
-        .setColor(0x00bdff)
-        .setTitle("Initiate Poll")
-        .setDescription("v!poll to initiate a simple yes or no poll");
+      const pollEmbed = new Discord.MessageEmbed()
+        .setTitle("Server poll!")
+        .setDescription("Only staff+ can use this command.");
 
       if (!args[1]) {
-        message.channel.send(Embed);
+        message.channel.send(pollEmbed);
+        return;
       }
 
-      let msgArgs = args.slice(1).join(" ");
+      let myArgs = args.slice(1).join(" ");
 
       message.channel
-        .send("📋 " + "**" + msgArgs + "**")
-        .then((messageReaction) => {
-          messageReaction.react("👍");
-          messageReaction.react("👎");
-          message.delete({ timeout: 1000 }).catch(console.error);
+        .send("📋 " + "**" + "Server Poll: " + myArgs + "**")
+        .then((MessageReaction) => {
+          MessageReaction.react("👍");
+          MessageReaction.react("👎");
         });
-
       break;
 
     case "kick":

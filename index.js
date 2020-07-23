@@ -175,27 +175,18 @@ bot.on("message", (msg) => {
     case "help":
       const helperEmbed = new Discord.MessageEmbed()
         .setColor("#ff7600")
-        .setAuthor("SFS Y-Y")
+        .setAuthor("TheProDev Official")
         .setTitle("Helper Embed")
-        .setThumbnail(
-          "https://yt3.ggpht.com/a/AATXAJw8yiJdcR7B8ddAlRorfp8VzeTPuf_pKy3kzRFw=s144-c-k-c0xffffffff-no-rj-mo"
-        )
-        .setDescription(
-          "You can do this command only in SFS Y-Y official server."
-        )
+        .setDescription("The bot made by TheProDev Official")
         .addFields(
           { name: "Prefix", value: "The bot prefix is: &" },
           {
             name: "Commands",
-            value:
-              "The commands are in #bot-commands-info in SFS Y-Y official server",
+            value: "The commands are in #bot-commands-info in the server",
           }
         )
         .setTimestamp()
-        .setFooter(
-          "SFS Y-Y the official discord bot",
-          "https://yt3.ggpht.com/a/AATXAJw8yiJdcR7B8ddAlRorfp8VzeTPuf_pKy3kzRFw=s144-c-k-c0xffffffff-no-rj-mo"
-        );
+        .setFooter("Hi bot, the fun bot!");
 
       msg.author.send(helperEmbed);
       break;

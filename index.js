@@ -14,6 +14,11 @@ const PREFIX = "&";
 
 var version = "1.0";
 
+bot.on("ready", () => {
+  console.log("SFS Y-Y bot is online!");
+  bot.user.setActivity("I'm not playing! (the prefix is: &)");
+});
+
 /* Member Count */
 const serverStats = {
   serverID: "729338182528663714",
@@ -65,10 +70,6 @@ bot.on("guildMemberRemove", (member) => {
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
 
 /* Auto messages reply */
-bot.on("ready", () => {
-  console.log("SFS Y-Y bot is online!");
-  bot.user.setActivity("In tests", { type: "WATCHING" }).catch(console.error);
-});
 
 bot.on("guildMemberAdd", (member) => {
   const channel = member.guild.channels.cache.find(

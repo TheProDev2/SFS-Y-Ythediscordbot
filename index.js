@@ -371,4 +371,4 @@ function image(message) {
   });
 }
 
-bot.login(token);
+bot.login(process.env.token);

@@ -114,20 +114,13 @@ bot.on("message", (msg) => {
 
 bot.on("message", (message) => {
   if (message.content === "inviteme") {
-    const channel = member.guild.channels.cache.find(
-      (channel) => channel.name === "bot-commands-info"
-    );
-
-    if (!channel) return;
-
-    channel.send(
+    message.channel.send(
       `Please invite me to your server, I make him fun!
       The link: https://discord.com/oauth2/authorize?client_id=729385591506206820&scope=bot&permissions=2146958847
 
       for help type &help.
 
-      ||<{@everyone}>||
-      );`
+      ||<{@everyone}>||`
     );
   }
 });

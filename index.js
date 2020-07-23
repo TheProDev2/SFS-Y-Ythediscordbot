@@ -272,7 +272,16 @@ bot.on("message", (message) => {
         const member = message.guild.member(userman);
 
         if (member) {
-          member.send("It's test!");
+          message.channel
+            .send(
+              `Hacking ${member}, the hack in progress
+          [...........]`
+            )
+            .then((msg) => {
+              setTimeout(function () {
+                msg.edit("Just kidding!");
+              }, 5000);
+            });
         }
       }
       break;

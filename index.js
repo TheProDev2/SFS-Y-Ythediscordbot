@@ -8,12 +8,15 @@ const cheerio = require("cheerio");
 
 const request = require("request");
 
-const PREFIX = "&";
-
-var version = "1.2.0";
-
 const ytdl = require("ytdl-core");
 
+const token = "NzI5Mzg1NTkxNTA2MjA2ODIw.XwIhPw.A56YWN0I35AJHfrkmedLA6ZeP1Q";
+
+const PREFIX = "&";
+
+var version = "1.0";
+
+/* Member Count */
 const serverStats = {
   serverID: "729338182528663714",
   totalUsersID: "730343531650220065",
@@ -61,8 +64,12 @@ bot.on("guildMemberRemove", (member) => {
     );
 });
 
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+
+/* Auto messages reply */
 bot.on("ready", () => {
   console.log("SFS Y-Y bot is online!");
+  bot.user.setActivity("In tests", { type: "WATCHING" }).catch(console.error);
 });
 
 bot.on("guildMemberAdd", (member) => {
@@ -95,12 +102,6 @@ bot.on("message", (msg) => {
 });
 
 bot.on("message", (msg) => {
-  if (msg.content === "היי") {
-    msg.reply("שלום!");
-  }
-});
-
-bot.on("message", (msg) => {
   if (msg.content === "מה קורה") {
     msg.reply("הכל בסדר!");
   }
@@ -112,6 +113,9 @@ bot.on("message", (msg) => {
   }
 });
 
+/* -------------------------------------------------------------------- */
+
+/* Verify command */
 bot.on("message", (message) => {
   if (message.author.bot) return;
   if (
@@ -132,6 +136,24 @@ bot.on("message", (message) => {
   }
 });
 
+/* ----------------------------------------------------------------------------------------------------------- */
+
+bot.on("message", (msg) => {
+  let wordArray = msg.content.split(" ");
+
+  let filterWords = ["Stupid", "stupid", "Dumb", "dumb"];
+
+  for (var i = 0; i < filterWords.length; i++) {
+    if (wordArray.includes(filterWords[i])) {
+      msg.delete();
+      msg.channel.send(
+        `Sorry ${msg.author.username}, on this server we don't use words like that!`
+      );
+      break;
+    }
+  }
+});
+
 bot.on("message", (msg) => {
   let args = msg.content.substring(PREFIX.length).split(" ");
 
@@ -143,6 +165,12 @@ bot.on("message", (msg) => {
         );
       if (!args[1]) return msg.reply("Error, please define second arg");
       msg.channel.bulkDelete(args[1]);
+      break;
+
+    case "joke":
+      msg.reply(
+        'A man is talking to God. The man: "God, how long is a million years?" God: "To me it is about a minute." The Man: "God, how much is a million dollars?" God: "To me it is a penny" The man: "God, may I have a penny?" God: "Wait a minute."'
+      );
       break;
 
     case "help":
@@ -162,9 +190,7 @@ bot.on("message", (msg) => {
             name: "Commands",
             value:
               "The commands are in #bot-commands-info in SFS Y-Y official server",
-          },
-
-          { name: "Bot Version", value: "My version is " + version }
+          }
         )
         .setTimestamp()
         .setFooter(
@@ -173,12 +199,6 @@ bot.on("message", (msg) => {
         );
 
       msg.author.send(helperEmbed);
-      break;
-
-    case "joke":
-      msg.reply(
-        'A man is talking to God. The man: "God, how long is a million years?" God: "To me it is about a minute." The Man: "God, how much is a million dollars?" God: "To me it is a penny" The man: "God, may I have a penny?" God: "Wait a minute."'
-      );
       break;
   }
 });
@@ -243,10 +263,6 @@ bot.on("message", (message) => {
 
   switch (args[0]) {
     case "poll":
-      if (!message.member.roles.cache.find((r) => r.name === "Staff"))
-        return message.channel.send(
-          "You dont have the permisions to do this command."
-        );
       const pollEmbed = new Discord.MessageEmbed()
         .setTitle("Server poll!")
         .setDescription("Only staff+ can use this command.");
@@ -267,11 +283,6 @@ bot.on("message", (message) => {
       break;
 
     case "kick":
-      if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
-        return msg.channel.send(
-          "You dont have the permisions to do this command."
-        );
-
       const user = message.mentions.users.first();
 
       if (user) {
@@ -297,11 +308,6 @@ bot.on("message", (message) => {
       break;
 
     case "ban":
-      if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
-        return msg.channel.send(
-          "You dont have the permisions to do this command."
-        );
-
       const userman = message.mentions.users.first();
 
       if (userman) {
@@ -367,4 +373,4 @@ function image(message) {
   });
 }
 
-bot.login(process.env.token);
+bot.login(token);

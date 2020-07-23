@@ -278,20 +278,8 @@ bot.on("message", (message) => {
           [...........]`
             )
             .then((msg) => {
-              setTimeout(function () {
-                msg.edit(`Hacking ${member}, the hack in progress
-                [///........]`);
-              }, 5000);
-            })
-            .then((msg) => {
-              setTimeout(function () {
-                msg.edit(`Hacking ${member}, the hack in progress
-               [//////....]`);
-              }, 2000);
-            })
-            .then((msg) => {
               msg.edit("Just kidding!");
-            });
+            }, 5000);
         }
       }
       break;

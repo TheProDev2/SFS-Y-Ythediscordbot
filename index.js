@@ -266,8 +266,6 @@ bot.on("message", (message) => {
 
   switch (args[0]) {
     case "hack":
-      message.reply("Please mention a user like: &hack @user");
-
       const userman = message.mentions.users.first();
 
       if (userman) {
@@ -285,6 +283,8 @@ bot.on("message", (message) => {
               }, 5000);
             });
         }
+      } else {
+        message.reply("Please mention a user like: &hack @user");
       }
       break;
   }

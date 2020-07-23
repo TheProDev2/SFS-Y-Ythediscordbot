@@ -10,7 +10,7 @@ const request = require("request");
 
 const ytdl = require("ytdl-core");
 
-const token = "NzI5Mzg1NTkxNTA2MjA2ODIw.XwIhPw.A56YWN0I35AJHfrkmedLA6ZeP1Q";
+//const token = "NzI5Mzg1NTkxNTA2MjA2ODIw.XxluOA.awy56wiJrJVunUu1ZfMcr5Tj6z4";//
 
 const PREFIX = "&";
 

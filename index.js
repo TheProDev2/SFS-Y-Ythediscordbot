@@ -265,6 +265,24 @@ bot.on("message", (message) => {
   let args = message.content.substring(PREFIX.length).split(" ");
 
   switch (args[0]) {
+    case "hack":
+      const userman = message.mentions.users.first();
+
+      if (userman) {
+        const member = message.guild.member(userman);
+
+        if (member) {
+          member.send("It's test!");
+        }
+      }
+      break;
+  }
+});
+
+bot.on("message", (message) => {
+  let args = message.content.substring(PREFIX.length).split(" ");
+
+  switch (args[0]) {
     case "poll":
       const pollEmbed = new Discord.MessageEmbed()
         .setTitle("Server poll!")

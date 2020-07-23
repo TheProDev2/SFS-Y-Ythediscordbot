@@ -266,6 +266,8 @@ bot.on("message", (message) => {
 
   switch (args[0]) {
     case "hack":
+      message.reply("Please mention a user like: &hack @user");
+
       const userman = message.mentions.users.first();
 
       if (userman) {
@@ -275,7 +277,7 @@ bot.on("message", (message) => {
           message.channel
             .send(
               `Hacking ${member}, the hack in progress
-          [...........]`
+              ██ᴳᵒᵈ̷ঊ̷ৣ̷ʀ̷҉̷ѧ̷҉̷ɴ̷҉̷Ԁ̷҉̷ᴏ̷██`
             )
             .then((msg) => {
               setTimeout(function () {

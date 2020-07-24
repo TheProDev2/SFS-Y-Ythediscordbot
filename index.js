@@ -9,8 +9,6 @@ const cheerio = require("cheerio");
 const request = require("request");
 
 const ytdl = require("ytdl-core");
-const { match } = require("ffmpeg-static");
-const { get } = require("request");
 
 const PREFIX = "&";
 
@@ -245,7 +243,6 @@ bot.on("message", (msg) => {
       return msg.channel.send(
         `I would rate ${msg.author.username} a ` + number + "/100"
       );
-
       break;
 
     case "8ball":

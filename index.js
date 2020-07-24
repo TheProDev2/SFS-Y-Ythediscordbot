@@ -188,9 +188,8 @@ bot.on("message", (msg) => {
     case "help":
       const helperEmbed = new Discord.MessageEmbed()
         .setColor("#ff7600")
-        .setAuthor("TheProDev Official")
+        .setAuthor("Made by TheProDev Official")
         .setTitle("Helper Embed")
-        .setDescription("The bot made by TheProDev Official")
         .addFields(
           { name: "Prefix", value: "The bot prefix is: &" },
           {
@@ -202,6 +201,40 @@ bot.on("message", (msg) => {
         .setFooter("Hi bot, the fun bot!");
 
       msg.author.send(helperEmbed);
+      break;
+
+    case "commandshelp":
+      const helperCommandsEmbed = new Discord.MessageEmbed()
+        .setColor("#fffb00")
+        .setAuthor("Made by TheProDev Official")
+        .setTitle("This is my all commands:")
+        .setDescription("My prefix is: &")
+        .addFields(
+          {
+            name: "&help",
+            value: "The bot is send to you private message with help.",
+            inline: true,
+          },
+          {
+            name: "&joke",
+            value: "The bot will be send to you message with joke",
+            inline: true,
+          },
+          {
+            name: "&image",
+            value: "The bot will be send to you rocket image",
+            inline: true,
+          },
+          {
+            name: "&hack @user",
+            value: "THE BOT WILL HACK THE USER!",
+            inline: true,
+          }
+        )
+        .setTimestamp()
+        .setFooter("Hi bot here to help you!");
+
+      msg.channel.send(helperCommandsEmbed);
       break;
   }
 });

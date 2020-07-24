@@ -237,6 +237,50 @@ bot.on("message", (msg) => {
       msg.channel.send(helperCommandsEmbed);
       break;
 
+    case "rps":
+      if (!args[1]) {
+        msg.channel.send("Please include your choice.");
+      }
+
+      let choices = ["rock", "paper", "scissors"];
+
+      if (choices.includes(args[1].toLowerCase())) {
+        let number = Math.floor(Math.random() * 3);
+
+        if (number == 1) {
+          return msg.channel.send(
+            "It was a tie, we both had " + args[1].toLowerCase()
+          );
+        }
+        if (number == 2) {
+          if (args[1].toLowerCase() == "rock") {
+            return msg.channel.send("I won, I had paper.");
+          }
+          if (args[1].toLowerCase() == "paper") {
+            return msg.channel.send("I won, I had scissors.");
+          }
+          if (args[1].toLowerCase() == "scissors") {
+            return msg.channel.send("I won, I had rock.");
+          }
+        }
+        if (number == 0) {
+          if (args[1].toLowerCase() == "rock") {
+            return msg.channel.send("You won, I had scissors.");
+          }
+          if (args[1].toLowerCase() == "paper") {
+            return msg.channel.send("You won, I had rock.");
+          }
+          if (args[1].toLowerCase() == "scissors") {
+            return msg.channel.send("You won, I had paper.");
+          }
+        }
+      } else {
+        return msg.channel.send(
+          "Please include either: Rock, Paper or Scissors."
+        );
+      }
+      break;
+
     case "rateme":
       let number = Math.floor(Math.random() * 101);
 

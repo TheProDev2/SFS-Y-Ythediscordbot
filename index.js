@@ -239,7 +239,7 @@ bot.on("message", (msg) => {
       msg.channel.send(helperCommandsEmbed);
       break;
 
-    case "rate":
+    case "rateme":
       let number = Math.floor(Math.random() * 101);
 
       return msg.channel.send(

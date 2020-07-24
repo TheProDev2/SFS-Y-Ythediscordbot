@@ -270,6 +270,7 @@ bot.on("message", (msg) => {
       if (number == 5) {
         return msg.channel.send("Odds are in your favorite.");
       }
+
       break;
   }
 });

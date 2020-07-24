@@ -244,34 +244,6 @@ bot.on("message", (msg) => {
         `I would rate ${msg.author.username} a ` + number + "/100"
       );
       break;
-
-    case "8ball":
-      if (!args[2]) {
-        return msg.channel.send("Please ask a full question.");
-      }
-
-      let number = Math.floor(Math.random() * 6);
-
-      if (number == 0) {
-        return msg.channel.send("Yes, definitely so.");
-      }
-      if (number == 1) {
-        return msg.channel.send("No, definitely not.");
-      }
-      if (number == 2) {
-        return msg.channel.send("Ask again later.");
-      }
-      if (number == 3) {
-        return msg.channel.send("It is uncertain.");
-      }
-      if (number == 4) {
-        return msg.channel.send("Odds are not in your favorite.");
-      }
-      if (number == 5) {
-        return msg.channel.send("Odds are in your favorite.");
-      }
-
-      break;
   }
 });
 

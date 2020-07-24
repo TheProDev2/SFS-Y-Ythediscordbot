@@ -245,7 +245,9 @@ bot.on("message", (msg) => {
       return msg.channel.send(
         `I would rate ${msg.author.username} a ` + number + "/100"
       );
+
       break;
+
     case "8ball":
       if (!args[2]) {
         return msg.channel.send("Please ask a full question.");

@@ -238,7 +238,7 @@ bot.on("message", (msg) => {
       break;
 
     case "rps":
-      if (!args[1]) {
+      if (!args[0]) {
         msg.channel.send("Please include your choice.");
       }
 

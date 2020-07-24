@@ -243,7 +243,7 @@ bot.on("message", (msg) => {
       let number = Math.floor(Math.random() * 101);
 
       return msg.channel.send(
-        `I would rate ${msg.author.username} a ` + number + "/100"
+        `I would rate ${msg.author.tag} a ` + number + "/100"
       );
       break;
   }

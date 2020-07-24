@@ -238,10 +238,6 @@ bot.on("message", (msg) => {
       break;
 
     case "rps":
-      if (!args[0]) {
-        msg.channel.send("Please include your choice.");
-      }
-
       let choices = ["rock", "paper", "scissors"];
 
       if (choices.includes(args[1].toLowerCase())) {

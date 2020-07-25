@@ -157,11 +157,6 @@ bot.on("message", (message) => {
 
   switch (args[0]) {
     case "report":
-      if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
-        return msg.channel.send(
-          "You dont have the permisions to do this command."
-        );
-
       let User = message.mentions.users.first() || null;
 
       if (User == null) {

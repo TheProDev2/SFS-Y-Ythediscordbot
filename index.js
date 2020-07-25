@@ -148,7 +148,66 @@ bot.on("message", (message) => {
   }
 });
 
-/* ----------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+
+/* Report Command */
+
+bot.on("message", (message) => {
+  let args = message.content.substring(PREFIX.length).split(" ");
+
+  switch (args[0]) {
+    case "report":
+      if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
+        return msg.channel.send(
+          "You dont have the permisions to do this command."
+        );
+
+      let User = message.mentions.users.first() || null;
+
+      if (User == null) {
+        return message.reply("You did not mention a user!");
+      } else {
+        let Reason = message.content.slice(PREFIX.length + 22 + 7) || null;
+        if (Reason == null) {
+          return message.reply("You did not specify reason for the report!");
+        }
+        let Avatar = User.displayAvatarURL();
+        let Channel = message.guild.channels.cache.find(
+          (ch) => ch.name === "reports"
+        );
+
+        if (!Channel)
+          return message.reply(
+            'There is no "reports" channel in this server, please connect the staff or staff+'
+          );
+
+        let Embed = new Discord.MessageEmbed()
+          .setTitle("New report!")
+          .setDescription(
+            `The user \`${message.author.tag}\` has reported the user \`${User.tag}\`!`
+          )
+          .setColor("#ff0000")
+          .setThumbnail(Avatar)
+          .addFields(
+            { name: "Mod ID", value: `${message.author.id}`, inline: true },
+            { name: "Mod Tag", value: `${message.author.tag}`, inline: true },
+            { name: "Reported ID", value: `${User.id}`, inline: true },
+            { name: "Reported Tag", value: `${User.tag}`, inline: true },
+            { name: "Reason", value: `\`${Reason.slice(1)}\``, inline: true },
+            {
+              name: "Date (M/D/Y)",
+              value: `${new Intl.DateTimeFormat("en-US").format(Date.now())}`,
+              inline: true,
+            }
+          );
+
+        Channel.send(Embed);
+      }
+      break;
+  }
+});
+
+/* ------------------------------------------------------------------------------------------------------- */
 
 bot.on("message", (msg) => {
   let wordArray = msg.content.split(" ");

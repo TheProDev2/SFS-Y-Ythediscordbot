@@ -247,8 +247,8 @@ bot.on("message", (message) => {
             { name: "User's tag:", value: `${User.tag}`, inline: true },
             { name: "User's ID:", value: `${User.id}`, inline: true },
             {
-              name: "User's last message:",
-              value: `${User.lastMessage}`,
+              name: "User's image:",
+              value: `${User.avatar}`,
               inline: true,
             }
           )

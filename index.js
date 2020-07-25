@@ -235,6 +235,7 @@ bot.on("message", (message) => {
 
     case "info":
       let User = message.mentions.users.first() || null;
+      let Avatar = User.displayAvatarURL();
 
       if (User == null) {
         message.reply("You need to @mention a user");
@@ -248,7 +249,7 @@ bot.on("message", (message) => {
             { name: "User's ID:", value: `${User.id}`, inline: true },
             {
               name: "User's image:",
-              value: `${User.avatar}`,
+              value: `${Avatar}`,
               inline: true,
             }
           )

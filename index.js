@@ -201,6 +201,65 @@ bot.on("message", (message) => {
       break;
   }
 });
+/* ------------------------------------------------------------------------------------------------------- */
+
+/* Info Command */
+
+bot.on("message", (message) => {
+  let args = message.content.substring(PREFIX.length).split(" ");
+
+  switch (args[0]) {
+    case "myinfo":
+      let embed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle(`${message.author.username}'s info`)
+        .addFields(
+          {
+            name: "Username:",
+            value: `${message.author.username}`,
+            inline: true,
+          },
+          { name: "User's tag:", value: `${message.author.tag}`, inline: true },
+          { name: "User's ID:", value: `${message.author.id}`, inline: true },
+          {
+            name: "User's last message:",
+            value: `\`${message.author.lastMessage}\``,
+            inline: true,
+          }
+        )
+
+        .setTimestamp();
+
+      message.channel.send(embed);
+      break;
+
+    case "info":
+      let User = message.mentions.users.first() || null;
+
+      if (User == null) {
+        message.reply("You need to @mention a user");
+      } else {
+        let embed = new Discord.MessageEmbed()
+          .setColor("RANDOM")
+          .setTitle(`${User.username}'s info`)
+          .addFields(
+            { name: "Username:", value: `${User.username}`, inline: true },
+            { name: "User's tag:", value: `${User.tag}`, inline: true },
+            { name: "User's ID:", value: `${User.id}`, inline: true },
+            {
+              name: "User's last message:",
+              value: `${User.lastMessage}`,
+              inline: true,
+            }
+          )
+
+          .setTimestamp();
+
+        message.channel.send(embed);
+      }
+      break;
+  }
+});
 
 /* ------------------------------------------------------------------------------------------------------- */
 

@@ -269,11 +269,7 @@ bot.on("message", (message) => {
   let args = message.content.substring(PREFIX.length).split(" ");
   switch (args[0]) {
     case "DM":
-      if (
-        !message.member.roles.cache.find((r) => r.name === "Admin") ||
-        !message.member.roles.cache.find((role) => role.name === "Co-owner") ||
-        !message.member.roles.cache.find((role) => role.name === "Owner")
-      )
+      if (!message.member.roles.cache.find((r) => r.name === "Admin"))
         return message.reply(
           "You dont have the permisions to use this command."
         );

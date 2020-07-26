@@ -473,6 +473,21 @@ bot.on("message", (message) => {
         message.reply("Please mention a user like: &hack @user");
       }
       break;
+
+    case "rps":
+      if (!args[1])
+        return message.reply("Please type your choice like: &rps rock");
+
+      let choises = ["rock", "paper", "scissors"];
+
+      if (choises.includes(args[1].toLowerCase())) {
+        let number = Math.floor(Math.random() * 3);
+
+        if (number == 1) return message.channel.send("It was a tie.");
+        if (number == 2) return message.channel.send("I won!");
+        if (number == 0) return message.channel.send("You won!");
+      }
+      break;
   }
 });
 

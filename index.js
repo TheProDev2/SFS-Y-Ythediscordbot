@@ -512,7 +512,7 @@ bot.on("message", (message) => {
           }
         }
       } else {
-        return message.channel.send("Please type your choice like: &rps paper");
+        return message.reply("Please type your choice like: &rps paper");
       }
 
       break;

@@ -483,10 +483,38 @@ bot.on("message", (message) => {
       if (choises.includes(args[1].toLowerCase())) {
         let number = Math.floor(Math.random() * 3);
 
-        if (number == 1) return message.channel.send("It was a tie.");
-        if (number == 2) return message.channel.send("I won!");
-        if (number == 0) return message.channel.send("You won!");
+        if (number == 1)
+          return message.channel.send(
+            "It was a tie, we both had " + args[1].toLowerCase()
+          );
+
+        if (number == 2) {
+          if (args[1].toLowerCase() == "rock") {
+            return message.channel.send("I won, I had paper.");
+          }
+          if (args[1].toLowerCase() == "paper") {
+            return message.channel.send("I won, I had scissors.");
+          }
+          if (args[1].toLowerCase() == "scissors") {
+            return message.channel.send("I won, I had rock.");
+          }
+        }
+
+        if (number == 0) {
+          if (args[1].toLowerCase() == "rock") {
+            return message.channel.send("You won, I had scissors.");
+          }
+          if (args[1].toLowerCase() == "paper") {
+            return message.channel.send("You won, I had rock.");
+          }
+          if (args[1].toLowerCase() == "scissors") {
+            return message.channel.send("You won, I had paper.");
+          }
+        }
+      } else {
+        return message.channel.send("Please type your choice like: &rps paper");
       }
+
       break;
   }
 });

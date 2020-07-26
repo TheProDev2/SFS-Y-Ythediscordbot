@@ -261,6 +261,41 @@ bot.on("message", (message) => {
       break;
   }
 });
+/* ------------------------------------------------------------------------------------------------------- */
+
+/* Bot DM Command */
+
+bot.on("message", (message) => {
+  let args = message.content.substring(PREFIX.length).split(" ");
+  switch (args[0]) {
+    case "DM":
+      if (
+        !message.member.roles.cache.find((r) => r.name === "Admin") ||
+        !message.member.roles.cache.find((role) => role.name === "Co-owner") ||
+        !message.member.roles.cache.find((role) => role.name === "Owner")
+      )
+        return message.reply(
+          "You dont have the permisions to use this command."
+        );
+
+      let user =
+        message.mentions.users.first() ||
+        message.guild.members.cache.get(args[0]);
+
+      if (!user)
+        return message.reply(
+          "You did not @mention a user, or you gave an invalid ID."
+        );
+      if (!args.slice(1).join(" "))
+        return message.reply("You did not specify your message!");
+
+      user
+        .send(args.slice(1).join(" "))
+        .catch(() => message.channel.send("That user could not be a DMed!"))
+        .then(`Sent a message to ${user.tag}`);
+      break;
+  }
+});
 
 /* ------------------------------------------------------------------------------------------------------- */
 
@@ -287,7 +322,7 @@ bot.on("message", (msg) => {
     case "clear":
       if (!msg.member.roles.cache.find((r) => r.name === "Staff"))
         return msg.channel.send(
-          "You dont have the permisions to do this command."
+          "You dont have the permisions to use this command."
         );
       if (!args[1]) return msg.reply("Error, please define second arg");
       msg.channel.bulkDelete(args[1]);

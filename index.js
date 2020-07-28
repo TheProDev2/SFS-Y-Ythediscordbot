@@ -86,11 +86,27 @@ bot.on("message", (msg) => {
   if (msg.content === "Hi") {
     msg.reply("Hello!");
   }
+
+  let userId = msg.author.id;
+
+  if (userId === "476305353991258112" && msg.content === "Hi") {
+    msg.reply("Hey it's Yaniv! Welcome back");
+  } else if (userId === "735442917279137913" && msg.content === "Hi") {
+    msg.reply("OMG THIS IS THE OWNER! Welcome back");
+  }
 });
 
 bot.on("message", (msg) => {
   if (msg.content === "Hello") {
     msg.reply("Hello!");
+  }
+
+  let userId = msg.author.id;
+
+  if (userId === "476305353991258112" && msg.content === "Hello") {
+    msg.reply("Hello yaniv!");
+  } else if (userId === "735442917279137913" && msg.content === "Hello") {
+    msg.reply("Hi Gabi");
   }
 });
 

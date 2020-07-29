@@ -8,6 +8,8 @@ const db = require("quick.db");
 
 const cheerio = require("cheerio");
 
+const dateformat = require("dateformat");
+
 const request = require("request");
 
 const ytdl = require("ytdl-core");
@@ -67,6 +69,89 @@ bot.on("guildMemberRemove", (member) => {
     .setName(
       `Bot Count: ${member.guild.members.cache.filter((m) => m.user.bot).size}`
     );
+});
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+
+// Server info command
+
+bot.on("message", (message) => {
+  let args = message.content.substring(PREFIX.length).split(" ");
+
+  switch (args[0]) {
+    case "sinfo":
+      // Server Icon or User Icon
+      let icon = message.guild.iconURL({ size: 2048 });
+
+      // Server Region
+      let region = {
+        brazil: "Brazil",
+        "eu-central": "Central Europe",
+        singapore: "Singapore",
+        london: "London",
+        russia: "Russia",
+        japan: "Japan",
+        hongkong: "Hongkong",
+        sydney: "Sydney",
+        "us-central": "U.S. Central",
+        "us-east": "U.S. East",
+        "us-south": "U.S. South",
+        "us-west": "U.S. West",
+        "eu-west": "Western Europe",
+      };
+
+      // Members
+      let member = message.guild.members;
+      let offline = member.cache.filter(
+          (m) => m.user.presence.status === "offline"
+        ).size,
+        online = member.cache.filter((m) => m.user.presence.status === "online")
+          .size,
+        idle = member.cache.filter((m) => m.user.presence.status === "idle")
+          .size,
+        dnd = member.cache.filter((m) => m.user.presence.status === "dnd").size,
+        robot = member.cache.filter((m) => m.user.bot).size,
+        total = message.guild.memberCount;
+
+      // Channels
+      let channels = message.guild.channels;
+      let text = channels.cache.filter((r) => r.type === "text").size,
+        vc = channels.cache.filter((r) => r.type === "voice").size,
+        category = channels.cache.filter((r) => r.type === "category").size,
+        totalchan = channels.cache.size;
+
+      // Location
+      let location = region[message.guild.region];
+
+      // Date
+      let x = Date.now() - message.guild.createdAt;
+      let h = Math.floor(x / 86400000);
+      let created = dateformat(message.guild.createdAt);
+
+      // Embed
+      let embed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setThumbnail(icon)
+        .setAuthor(message.guild.name, icon)
+        .setDescription(`**ID:** ${message.guild.id}`)
+        .addField("Region", location)
+        .addField("Date Created", `${created} \nsince **${h}** day(s)`)
+        .addField(
+          "Owner",
+          `**${message.guild.owner.user.tag}** \n\`${message.guild.owner.user.id}\``
+        )
+        .addField(
+          `Members [${total}]`,
+          `Online: ${online} \nIdle: ${idle} \nDND: ${dnd} \nOffline: ${offline} \nBots: ${robot}`
+        )
+        .addField(
+          `Channels [${totalchan}]`,
+          `Text: ${text} \nVoice: ${vc} \nCategory: ${category}`
+        )
+        .setTimestamp(new Date());
+
+      message.channel.send(embed);
+      break;
+  }
 });
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
@@ -169,19 +254,11 @@ bot.on("message", (msg) => {
   }
 
   if (userId === "381563665650024448" && msg.content === "Hello") {
-    msg.reply("**Hacking the person...**").then((m) => {
-      setTimeout(function () {
-        m.edit("**The person is hacked!** Hi Cam!");
-      });
-    });
+    msg.reply("Hi Cam!");
   }
 
   if (userId === "381563665650024448" && msg.content === "Hi") {
-    msg.reply("**Hacking the person...**").then((m) => {
-      setTimeout(function () {
-        m.edit("**The person is hacked!** Hi Cam!");
-      }, 5000);
-    });
+    msg.reply("Hi Cam!");
   }
 });
 

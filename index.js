@@ -630,7 +630,7 @@ bot.on("message", (message) => {
 
       break;
 
-    case "Cam":
+    case "cam":
       cam(message);
       break;
   }
@@ -672,7 +672,7 @@ function image(message) {
 
 function cam(message) {
   var options = {
-    url: "http://results.dogpile.com/serp?qc=images&q=" + "cam",
+    url: "http://results.dogpile.com/serp?qc=images&q=" + "camera",
     method: "GET",
     headers: {
       Accept: "text/html",

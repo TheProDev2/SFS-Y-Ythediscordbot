@@ -543,10 +543,10 @@ bot.on("message", (message) => {
 
   switch (args[0]) {
     case "hack":
-      const userman = message.mentions.users.first();
+      let userman = message.mentions.users.first();
 
       if (userman) {
-        const member = message.guild.member(userman);
+        let member = message.guild.member(userman);
 
         if (member) {
           message.channel
@@ -562,6 +562,18 @@ bot.on("message", (message) => {
         }
       } else {
         message.reply("Please mention a user like: &hack @user");
+      }
+      break;
+
+    case "tag":
+      let user = message.mentions.users.first();
+
+      if (user) {
+        let member = message.guild.member(user);
+
+        if (member) {
+          message.channel.send(`${user} your it!`);
+        }
       }
       break;
 

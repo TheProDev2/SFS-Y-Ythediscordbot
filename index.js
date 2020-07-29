@@ -135,10 +135,7 @@ bot.on("message", (message) => {
         .setDescription(`**ID:** ${message.guild.id}`)
         .addField("Region", location)
         .addField("Date Created", `${created} \nsince **${h}** day(s)`)
-        .addField(
-          "Owner",
-          `**${message.guild.owner.user.tag}** \n\`${message.guild.owner.user.id}\``
-        )
+        .addField("Owner", '**ProTheGamer3000#5643** \n"735442917279137913"')
         .addField(
           `Members [${total}]`,
           `Online: ${online} \nIdle: ${idle} \nDND: ${dnd} \nOffline: ${offline} \nBots: ${robot}`

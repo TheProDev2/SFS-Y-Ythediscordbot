@@ -4,6 +4,8 @@ const bot = new Discord.Client();
 
 const ms = require("ms");
 
+const db = require("quick.db");
+
 const cheerio = require("cheerio");
 
 const request = require("request");
@@ -66,6 +68,63 @@ bot.on("guildMemberRemove", (member) => {
       `Bot Count: ${member.guild.members.cache.filter((m) => m.user.bot).size}`
     );
 });
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------ */
+
+// AFK Command
+
+bot.on("message", async (message) => {
+  let args = message.content.substring(PREFIX.length).split(" ");
+
+  let afk = new db.table("AFKs"),
+    authorStatus = afk.fetch(message.author.id),
+    mentioned = message.mentions.members.first();
+
+  if (mentioned) {
+    let status = afk.fetch(mentioned.id);
+
+    if (status) {
+      const Embed = new Discord.MessageEmbed()
+        .setColor("#ffffff")
+        .setDescription(
+          `This user (${mentioned.user.tag}) is AFK: **${status}**`
+        );
+
+      message.channel.send(Embed).then((i) => i.delete({ timeout: 5000 }));
+    }
+  }
+
+  if (authorStatus) {
+    const Embed = new Discord.MessageEmbed()
+      .setColor("#ffffff")
+      .setDescription(`**${message.author.tag}** is no longer AFK.`);
+
+    message.channel.send(Embed).then((i) => i.delete({ timeout: 5000 }));
+
+    afk.delete(message.author.id);
+  }
+
+  switch (args[0]) {
+    case "afk":
+      const status = new db.table("AFKs");
+      let afk = status.fetch(message.author.id);
+      const embed = new Discord.MessageEmbed().setColor("#ffffff");
+
+      if (!afk) {
+        embed.setDescription(`**${message.author.tag}** now AFK.`);
+        embed.setFooter(`Reason ${args.join(" ") ? args.join(" ") : "AFK"}`);
+        status.set(message.author.id, args.join(" ") || "AFK");
+      } else {
+        embed.setDescription("You are no longer AFK.");
+        status.delete(message.author.id);
+      }
+
+      message.channel.send(embed);
+      break;
+  }
+});
+
+/* -------------------------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
 

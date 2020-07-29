@@ -121,7 +121,7 @@ bot.on("message", (msg) => {
     msg.reply("**Hacking the person...**").then((m) => {
       setTimeout(function () {
         m.edit("**The person is hacked!** Hi Cam!");
-      });
+      }, 5000);
     });
   }
 });

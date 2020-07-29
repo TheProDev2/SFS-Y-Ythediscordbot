@@ -108,6 +108,22 @@ bot.on("message", (msg) => {
   } else if (userId === "735442917279137913" && msg.content === "Hello") {
     msg.reply("Hi Gabi");
   }
+
+  if (userId === "381563665650024448" && msg.content === "Hello") {
+    msg.reply("**Hacking the person...**").then((m) => {
+      setTimeout(function () {
+        m.edit("**The person is hacked!** Hi Cam!");
+      });
+    });
+  }
+
+  if (userId === "381563665650024448" && msg.content === "Hi") {
+    msg.reply("**Hacking the person...**").then((m) => {
+      setTimeout(function () {
+        m.edit("**The person is hacked!** Hi Cam!");
+      });
+    });
+  }
 });
 
 bot.on("message", (msg) => {

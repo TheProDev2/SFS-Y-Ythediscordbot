@@ -76,107 +76,6 @@ bot.on("guildMemberRemove", (member) => {
 
 // verification command
 
-bot.on("guildMemberAdd", (member) => {
-  if (member.user.bot) return;
-
-  let number = randomInteger(100000, 1000000);
-
-  let verifyChannel = member.guild.channels.cache.find(
-    (ch) => ch.id === "743899859450462390"
-  );
-
-  db.set(`verification.${member.user.id}`, number);
-
-  const dm = new Discord.MessageEmbed()
-    .setColor("#7289DA")
-    .setTitle(`Welcome to ${member.guild.name}`)
-    .setDescription(
-      "Hello! Before you get started, I just want you to verify yourself first."
-    )
-    .addField(
-      "Put your code into #verify channel.",
-      `**This is your code:** ${code}`
-    );
-
-  member.author.send(dm).catch(() => {
-    verifyChannel
-      .send(
-        `<@!${member.user.id}> Hey, I guess your DM is locked. How you about unlocked it first and type \`resend\` here.`
-      )
-      .then((i) => i.delete({ timeout: 10000 }));
-  });
-
-  function randomInteger(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-});
-
-bot.on("guildMemberRemove", (member) => {
-  let codeExist = db.get(`verification.${member.user.id}`);
-
-  if (codeExist) db.delete(`verification.${member.user.id}`);
-});
-
-bot.on("message", (message) => {
-  if (message.channel.id === "743899859450462390") {
-    if (message.content.startsWith("resend")) {
-      let code = db.get(`verification.${message.author.id}`);
-
-      message.delete();
-
-      const dm = new Discord.MessageEmbed()
-        .setColor("#7289DA")
-        .setTitle(`Welcome to ${message.guild.name}`)
-        .setDescription(
-          "Hello! Before you get started, I just want you to verify yourself first."
-        )
-        .addField(
-          "Put your code into #verify channel.",
-          `**This is your code:** ${code}`
-        );
-
-      message.author.send(dm).catch(() => {
-        return message
-          .reply("Your DM is still locked. Unlock your DM first.")
-          .then((i) => i.delete({ timeout: 10000 }));
-      });
-
-      return message
-        .reply("Check your DM.")
-        .then((i) => i.delete({ timeout: 10000 }));
-    }
-    if (!message.author.bot) {
-      let verify = parseInt(message.content);
-      let code = db.get(`verification.${message.author.id}`);
-
-      if (verify !== code) {
-        message.delete();
-        return message
-          .reply("Are you sure that is the code that you typing it?")
-          .then((i) => i.delete({ timeout: 10000 }));
-      }
-
-      if (verify === code) {
-        message.delete();
-
-        db.delete(`verification.${message.author.id}`);
-
-        message
-          .reply("You are not a robot! Please wait, 5 seconds okay?")
-          .then((i) => i.delete({ timeout: 7500 }));
-
-        setTimeout(function () {
-          message.member.roles.add("743794796128370708");
-        }, 5000);
-      }
-    }
-  }
-  break;
-});
-
 /* ------------------------------------------------------------------------------------------------------------------------------------------ */
 
 // Server info command
@@ -404,9 +303,9 @@ bot.on("message", (message) => {
   if (message.author.bot) return;
   if (
     message.content.toLowerCase() === "&verify" &&
-    message.channel.id === "729994672847454218"
+    message.channel.id === "743899859450462390"
   ) {
-    let role = message.guild.roles.cache.get("729597571156148274");
+    let role = message.guild.roles.cache.get("743794796128370708");
 
     if (role) {
       try {

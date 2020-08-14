@@ -27,10 +27,10 @@ bot.on("ready", () => {
 
 /* Member Count */
 const serverStats = {
-  serverID: "729338182528663714",
-  totalUsersID: "730343531650220065",
-  memberCountID: "730343640206934047",
-  botCountID: "730343681751646209",
+  serverID: "729338182528663714" || "743793476386422784",
+  totalUsersID: "730343531650220065" || "743851961241305108",
+  memberCountID: "730343640206934047" || "743852323780165742",
+  botCountID: "730343681751646209" || "743852625056759828",
 };
 
 bot.on("guildMemberAdd", (member) => {

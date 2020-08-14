@@ -4,6 +4,8 @@ const bot = new Discord.Client();
 
 const ms = require("ms");
 
+const convert = require("parse-ms");
+
 const db = require("quick.db");
 
 const cheerio = require("cheerio");
@@ -692,6 +694,75 @@ bot.on("message", (message) => {
         return message.reply("Please type your choice like: &rps paper");
       }
 
+      break;
+
+    case "spotify":
+      let User;
+      if (message.mentions.users.first()) {
+        User = message.mentions.users.first();
+      } else {
+        User = message.author;
+      }
+
+      let Status;
+      if (User.presence.activities.length === 1)
+        Status = User.presence.activities[0];
+      else if (User.presence.activities.length > 1)
+        Status = User.presence.activities[1];
+
+      if (
+        User.presence.activities.length === 0 ||
+        (Status.name !== "Spotify" && Status.type !== "LISTENING")
+      ) {
+        return message.reply("This user isn't listening to Spotify.");
+      }
+
+      if (
+        Status !== null &&
+        Status.type === "LISTENING" &&
+        Status.name === "Spotify" &&
+        Status.assets !== null
+      ) {
+        let image = `https://i.scdn.co/image/${Status.assets.largeImage.slice(
+            8
+          )}`,
+          url = `https://open.spotify.com/track/${Status.syncID}`,
+          name = Status.details,
+          artist = Status.state,
+          album = Status.assets.largeText,
+          timeStart = Status.timestamps.start,
+          timeEnd = Status.timestamps.end,
+          timeConvert = convert(timeEnd - timeStart);
+
+        let minutes =
+          timeConvert.minutes < 10
+            ? `0${timeConvert.minutes}`
+            : timeConvert.minutes;
+        let seconds =
+          timeConvert.seconds < 10
+            ? `0${timeConvert.seconds}`
+            : timeConvert.seconds;
+        let time = `${minutes}:${seconds}`;
+
+        const Embed = new Discord.MessageEmbed()
+          .setAuthor(
+            "Spotify Track Information",
+            "https://image.flaticon.com/icons/svg/2111/2111624.svg"
+          )
+          .setColor("#1ed768")
+          .setThumbnail(image)
+          .addField("Name:", name, true)
+          .addField("Album", album, true)
+          .addField("Artist:", artist, true)
+          .addField("Duration:", time, false)
+          .addField(
+            "Listen now on Spotify!",
+            `[\`${artist} - ${name}](${url})`,
+            false
+          );
+
+        return message.channel.send(Embed);
+      }
       break;
   }
 });
